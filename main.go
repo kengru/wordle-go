@@ -26,8 +26,6 @@ func main() {
 			totalGuessLeft--
 		}
 	}
-
-	fmt.Println(answer)
 }
 
 func presentation() {
