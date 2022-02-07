@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -19,6 +18,8 @@ func main() {
 		if err != nil {
 			fmt.Println(msg)
 		} else {
+			guessCheck := checkGuess(answer, guess)
+			guessCheck.printGuess()
 			totalGuessLeft--
 		}
 	}
@@ -29,14 +30,4 @@ func main() {
 func presentation() {
 	fmt.Println("Welcome to Gordle!")
 	fmt.Println("Try to guess the 5 letter word of the day: ")
-}
-
-func validateGuess(d dict, g string) (string, error) {
-	if len(g) != 5 {
-		return "The guess needs to have 5 letters.", errors.New("guess_size_error")
-	}
-	if !d.isWordInDictionary(g) {
-		return "That is not a word in our dictionary.", errors.New("doesnt_exist_error")
-	}
-	return "", nil
 }
