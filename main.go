@@ -6,17 +6,21 @@ import (
 )
 
 func main() {
+	var guess string
 	dict := getDict()
 	answer := dict.randomWordOfDay()
-	var guess string
+	totalGuessLeft := 5
 
 	presentation()
-	fmt.Scanln(&guess)
 
-	msg, err := validateGuess(dict, guess)
-
-	if err != nil {
-		fmt.Println(msg)
+	for totalGuessLeft > 0 {
+		fmt.Scanln(&guess)
+		msg, err := validateGuess(dict, guess)
+		if err != nil {
+			fmt.Println(msg)
+		} else {
+			totalGuessLeft--
+		}
 	}
 
 	fmt.Println(answer)
