@@ -36,8 +36,9 @@ func validateGuess(d dict, g string, gl guessList) (string, error) {
 	return "", nil
 }
 
-func checkGuess(a string, g string) fullGuess {
+func checkGuess(a string, g string) (fullGuess, bool) {
 	gResult := []letterGuess{}
+	guessed := false
 	for idx, letterRune := range g {
 		var color color
 		l := string(letterRune)
@@ -53,7 +54,10 @@ func checkGuess(a string, g string) fullGuess {
 		newL := letterGuess{l, color}
 		gResult = append(gResult, newL)
 	}
-	return fullGuess{gResult, g}
+	if g == a {
+		guessed = true
+	}
+	return fullGuess{gResult, g}, guessed
 }
 
 func (fg fullGuess) printGuess() {
